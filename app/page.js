@@ -246,7 +246,7 @@ export default function InvoiceGenerator() {
                     <span className="font-medium">${tax.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between py-3 bg-primary text-white rounded-lg px-4 mt-2">
-                    <span className font-semibold">Total:</span>
+                    <span className="font-semibold">Total:</span>
                     <span className="font-bold text-lg">${total.toLocaleString()}</span>
                   </div>
                 </div>
