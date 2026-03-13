@@ -1,5 +1,5 @@
 // ========================================
-// OHA Invoice Generator - ThemeSelection Style
+// OHA Invoice Generator - Luxury Dark/Gold Theme
 // ========================================
 
 'use client'
@@ -73,7 +73,7 @@ export default function InvoiceGenerator() {
     const jsPDF = (await import('jspdf')).default
     
     const element = invoiceRef.current
-    const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' })
+    const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#1a1a2e' })
     const imgData = canvas.toDataURL('image/png')
     
     const pdf = new jsPDF('p', 'mm', 'a4')
@@ -85,26 +85,27 @@ export default function InvoiceGenerator() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)' }}>
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header className="shadow-lg" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)', borderBottom: '1px solid #d4af37' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-xl text-white font-bold">O</span>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)' }}>
+              <span className="text-xl text-gray-900 font-bold">O</span>
             </div>
-            <h1 className="text-xl font-bold text-gray-800">OHA Invoice System</h1>
+            <h1 className="text-xl font-bold" style={{ color: '#d4af37' }}>OHA Invoice System</h1>
           </div>
           <div className="flex gap-2">
             {['invoice', 'customers', 'products'].map(tab => (
               <button 
                 key={tab}
                 onClick={() => setActiveTab(tab)} 
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  activeTab === tab 
-                    ? 'bg-primary text-white' 
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
+                className="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                style={{ 
+                  backgroundColor: activeTab === tab ? 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)' : 'transparent',
+                  color: activeTab === tab ? '#1a1a2e' : '#d4af37',
+                  border: activeTab === tab ? 'none' : '1px solid #d4af37'
+                }}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
@@ -117,115 +118,118 @@ export default function InvoiceGenerator() {
         {activeTab === 'invoice' && (
           <>
             {/* Controls */}
-            <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
+            <div className="rounded-xl p-4 mb-6 shadow-lg" style={{ background: 'rgba(26, 26, 46, 0.9)', border: '1px solid #d4af37' }}>
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Invoice No.</label>
-                  <input type="text" value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                  <label className="block text-xs font-medium mb-1" style={{ color: '#d4af37' }}>Invoice No.</label>
+                  <input type="text" value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)} className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: '#0f0f23', border: '1px solid #d4af37', color: '#fff' }} />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Date</label>
-                  <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                  <label className="block text-xs font-medium mb-1" style={{ color: '#d4af37' }}>Date</label>
+                  <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: '#0f0f23', border: '1px solid #d4af37', color: '#fff' }} />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Due Date</label>
-                  <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                  <label className="block text-xs font-medium mb-1" style={{ color: '#d4af37' }}>Due Date</label>
+                  <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: '#0f0f23', border: '1px solid #d4af37', color: '#fff' }} />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Customer</label>
-                  <select value={customer.id} onChange={(e) => setCustomer(SAMPLE_CUSTOMERS.find(c => c.id === e.target.value))} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                    {SAMPLE_CUSTOMERS.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  <label className="block text-xs font-medium mb-1" style={{ color: '#d4af37' }}>Customer</label>
+                  <select value={customer.id} onChange={(e) => setCustomer(SAMPLE_CUSTOMERS.find(c => c.id === e.target.value))} className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: '#0f0f23', border: '1px solid #d4af37', color: '#fff' }}>
+                    {SAMPLE_CUSTOMERS.map(c => <option key={c.id} value={c.id} style={{ backgroundColor: '#0f0f23' }}>{c.name}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Payment</label>
-                  <select value={payment} onChange={(e) => setPayment(e.target.value)} className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm">
-                    <option>COD</option>
-                    <option>Net 30</option>
-                    <option>Net 60</option>
+                  <label className="block text-xs font-medium mb-1" style={{ color: '#d4af37' }}>Payment</label>
+                  <select value={payment} onChange={(e) => setPayment(e.target.value)} className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: '#0f0f23', border: '1px solid #d4af37', color: '#fff' }}>
+                    <option style={{ backgroundColor: '#0f0f23' }}>COD</option>
+                    <option style={{ backgroundColor: '#0f0f23' }}>Net 30</option>
+                    <option style={{ backgroundColor: '#0f0f23' }}>Net 60</option>
                   </select>
                 </div>
               </div>
               <div className="mt-4 flex gap-3">
-                <button onClick={addItem} className="px-4 py-2 bg-success text-white rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90">
+                <button onClick={addItem} className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all hover:opacity-90" style={{ background: 'linear-gradient(135deg, #2dce89 0%, #2dce8f 100%)', color: '#fff' }}>
                   <Plus size={16} /> Add Item
                 </button>
-                <button onClick={exportPDF} className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90">
+                <button onClick={exportPDF} className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all hover:opacity-90" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)', color: '#1a1a2e' }}>
                   <Download size={16} /> Export PDF
                 </button>
-                <button onClick={() => window.print()} className="px-4 py-2 bg-gray-600 text-white rounded-lg text-sm font-medium flex items-center gap-2 hover:opacity-90">
+                <button onClick={() => window.print()} className="px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all hover:opacity-90" style={{ background: 'transparent', border: '1px solid #d4af37', color: '#d4af37' }}>
                   <Printer size={16} /> Print
                 </button>
               </div>
             </div>
 
-            {/* Invoice Preview - ThemeSelection Style */}
-            <div ref={invoiceRef} className="bg-white p-8 shadow-lg" style={{ minHeight: '297mm' }}>
+            {/* Invoice Preview - Luxury Dark/Gold Theme */}
+            <div ref={invoiceRef} className="p-8 shadow-2xl" style={{ minHeight: '297mm', background: 'linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%)', border: '2px solid #d4af37' }}>
+              {/* Decorative gold line */}
+              <div className="h-1 mb-8 rounded" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }}></div>
+
               {/* Top Section */}
               <div className="flex justify-between mb-8">
                 {/* Company Info */}
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-1">{COMPANY_INFO.name}</h1>
-                  <p className="text-gray-500 text-sm">{COMPANY_INFO.address}</p>
-                  <p className="text-gray-500 text-sm">{COMPANY_INFO.tel} | {COMPANY_INFO.email}</p>
+                  <h1 className="text-2xl font-bold mb-1" style={{ color: '#d4af37' }}>{COMPANY_INFO.name}</h1>
+                  <p className="text-gray-400 text-sm">{COMPANY_INFO.address}</p>
+                  <p className="text-gray-400 text-sm">{COMPANY_INFO.tel} | {COMPANY_INFO.email}</p>
                 </div>
                 {/* Invoice Info */}
                 <div className="text-right">
-                  <h2 className="text-3xl font-bold text-primary mb-2">INVOICE</h2>
-                  <p className="text-gray-600"><span className="font-medium">Invoice No:</span> {invoiceNo}</p>
-                  <p className="text-gray-600"><span className="font-medium">Date:</span> {date}</p>
-                  <p className="text-gray-600"><span className="font-medium">Due Date:</span> {dueDate}</p>
+                  <h2 className="text-4xl font-bold mb-2" style={{ color: '#d4af37', textShadow: '0 0 20px rgba(212, 175, 55, 0.3)' }}>INVOICE</h2>
+                  <p className="text-gray-300"><span className="font-medium" style={{ color: '#d4af37' }}>Invoice No:</span> {invoiceNo}</p>
+                  <p className="text-gray-300"><span className="font-medium" style={{ color: '#d4af37' }}>Date:</span> {date}</p>
+                  <p className="text-gray-300"><span className="font-medium" style={{ color: '#d4af37' }}>Due Date:</span> {dueDate}</p>
                 </div>
               </div>
 
-              {/* Bill To / Invoice To */}
+              {/* Bill To / Ship To */}
               <div className="grid grid-cols-2 gap-8 mb-8">
-                <div className="bg-light rounded-lg p-4">
-                  <h3 className="font-bold text-primary text-sm mb-3 uppercase">Bill To</h3>
-                  <p className="font-bold text-gray-800">{customer.name}</p>
-                  <p className="text-gray-600 text-sm">{customer.address}</p>
-                  <p className="text-gray-600 text-sm">ATTN: {customer.attn} | {customer.tel}</p>
+                <div className="rounded-lg p-4" style={{ background: 'rgba(212, 175, 55, 0.1)', border: '1px solid #d4af37' }}>
+                  <h3 className="font-bold text-sm mb-3 uppercase" style={{ color: '#d4af37' }}>Bill To</h3>
+                  <p className="font-bold text-white">{customer.name}</p>
+                  <p className="text-gray-400 text-sm">{customer.address}</p>
+                  <p className="text-gray-400 text-sm">ATTN: {customer.attn} | {customer.tel}</p>
                 </div>
-                <div className="bg-light rounded-lg p-4">
-                  <h3 className="font-bold text-primary text-sm mb-3 uppercase">Ship To</h3>
-                  <p className="font-bold text-gray-800">{customer.name}</p>
-                  <p className="text-gray-600 text-sm">{customer.address}</p>
-                  <p className="text-gray-600 text-sm">ATTN: {customer.attn} | {customer.tel}</p>
+                <div className="rounded-lg p-4" style={{ background: 'rgba(212, 175, 55, 0.1)', border: '1px solid #d4af37' }}>
+                  <h3 className="font-bold text-sm mb-3 uppercase" style={{ color: '#d4af37' }}>Ship To</h3>
+                  <p className="font-bold text-white">{customer.name}</p>
+                  <p className="text-gray-400 text-sm">{customer.address}</p>
+                  <p className="text-gray-400 text-sm">ATTN: {customer.attn} | {customer.tel}</p>
                 </div>
               </div>
 
               {/* Items Table */}
               <table className="w-full mb-6">
                 <thead>
-                  <tr className="bg-primary text-white">
-                    <th className="py-3 px-4 text-left text-sm font-semibold">#</th>
-                    <th className="py-3 px-4 text-left text-sm font-semibold">JAN Code</th>
-                    <th className="py-3 px-4 text-left text-sm font-semibold">Description</th>
-                    <th className="py-3 px-4 text-center text-sm font-semibold">Qty</th>
-                    <th className="py-3 px-4 text-right text-sm font-semibold">Unit Price</th>
-                    <th className="py-3 px-4 text-right text-sm font-semibold">Amount</th>
+                  <tr style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)' }}>
+                    <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900">#</th>
+                    <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900">JAN Code</th>
+                    <th className="py-3 px-4 text-left text-sm font-semibold text-gray-900">Description</th>
+                    <th className="py-3 px-4 text-center text-sm font-semibold text-gray-900">Qty</th>
+                    <th className="py-3 px-4 text-right text-sm font-semibold text-gray-900">Unit Price</th>
+                    <th className="py-3 px-4 text-right text-sm font-semibold text-gray-900">Amount</th>
                     <th className="py-3 px-2"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {items.map((item, index) => (
-                    <tr key={item.id} className="border-b border-gray-100">
-                      <td className="py-3 px-4 text-gray-600">{index + 1}</td>
+                    <tr key={item.id} className="border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
+                      <td className="py-3 px-4 text-gray-400">{index + 1}</td>
                       <td className="py-3 px-4">
-                        <input type="text" value={item.jan} onChange={(e) => updateItem(item.id, 'jan', e.target.value)} className="w-full border-0 bg-transparent text-gray-800 font-mono text-sm" placeholder="JAN Code" />
+                        <input type="text" value={item.jan} onChange={(e) => updateItem(item.id, 'jan', e.target.value)} className="w-full border-0 bg-transparent font-mono text-sm" style={{ color: '#d4af37' }} placeholder="JAN Code" />
                       </td>
                       <td className="py-3 px-4">
-                        <input type="text" value={item.name} onChange={(e) => updateItem(item.id, 'name', e.target.value)} className="w-full border-0 bg-transparent text-gray-800" placeholder="Description" />
+                        <input type="text" value={item.name} onChange={(e) => updateItem(item.id, 'name', e.target.value)} className="w-full border-0 bg-transparent text-white" placeholder="Description" />
                       </td>
                       <td className="py-3 px-4 text-center">
-                        <input type="number" value={item.qty} onChange={(e) => updateItem(item.id, 'qty', parseInt(e.target.value) || 0)} className="w-16 border border-gray-200 rounded px-2 py-1 text-center text-sm" />
+                        <input type="number" value={item.qty} onChange={(e) => updateItem(item.id, 'qty', parseInt(e.target.value) || 0)} className="w-16 border rounded px-2 py-1 text-center text-sm" style={{ backgroundColor: '#0f0f23', borderColor: '#d4af37', color: '#fff' }} />
                       </td>
                       <td className="py-3 px-4 text-right">
-                        <input type="number" value={item.price} onChange={(e) => updateItem(item.id, 'price', parseFloat(e.target.value) || 0)} className="w-24 border border-gray-200 rounded px-2 py-1 text-right text-sm" />
+                        <input type="number" value={item.price} onChange={(e) => updateItem(item.id, 'price', parseFloat(e.target.value) || 0)} className="w-24 border rounded px-2 py-1 text-right text-sm" style={{ backgroundColor: '#0f0f23', borderColor: '#d4af37', color: '#fff' }} />
                       </td>
-                      <td className="py-3 px-4 text-right font-medium">${(item.qty * item.price).toLocaleString()}</td>
+                      <td className="py-3 px-4 text-right font-medium" style={{ color: '#d4af37' }}>${(item.qty * item.price).toLocaleString()}</td>
                       <td className="py-3 px-2 text-center">
-                        <button onClick={() => removeItem(item.id)} className="text-danger hover:opacity-70">
+                        <button onClick={() => removeItem(item.id)} className="hover:opacity-70" style={{ color: '#f5365c' }}>
                           <Trash2 size={16} />
                         </button>
                       </td>
@@ -237,75 +241,78 @@ export default function InvoiceGenerator() {
               {/* Totals */}
               <div className="flex justify-end">
                 <div className="w-72">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Subtotal:</span>
-                    <span className="font-medium">${subtotal.toLocaleString()}</span>
+                  <div className="flex justify-between py-2 border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+                    <span className="text-gray-400">Subtotal:</span>
+                    <span className="font-medium text-white">${subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Tax (0%):</span>
-                    <span className="font-medium">${tax.toLocaleString()}</span>
+                  <div className="flex justify-between py-2 border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
+                    <span className="text-gray-400">Tax (0%):</span>
+                    <span className="font-medium text-white">${tax.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between py-3 bg-primary text-white rounded-lg px-4 mt-2">
-                    <span className="font-semibold">Total:</span>
-                    <span className="font-bold text-lg">${total.toLocaleString()}</span>
+                  <div className="flex justify-between py-3 rounded-lg px-4 mt-2" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)' }}>
+                    <span className="font-semibold text-gray-900">Total:</span>
+                    <span className="font-bold text-lg text-gray-900">${total.toLocaleString()}</span>
                   </div>
                 </div>
               </div>
 
               {/* Bank Info & Notes */}
-              <div className="grid grid-cols-2 gap-8 mt-8 pt-8 border-t border-gray-200">
+              <div className="grid grid-cols-2 gap-8 mt-8 pt-8 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
                 <div>
-                  <h4 className="font-bold text-primary mb-3">Bank Information</h4>
-                  <p className="text-gray-600 text-sm"><span className="font-medium">Bank:</span> {COMPANY_INFO.bank}</p>
-                  <p className="text-gray-600 text-sm"><span className="font-medium">FPS:</span> {COMPANY_INFO.fps}</p>
-                  <p className="text-gray-600 text-sm mt-2"><span className="font-medium">Payment Terms:</span> {payment}</p>
+                  <h4 className="font-bold mb-3" style={{ color: '#d4af37' }}>Bank Information</h4>
+                  <p className="text-gray-400 text-sm"><span className="font-medium" style={{ color: '#d4af37' }}>Bank:</span> {COMPANY_INFO.bank}</p>
+                  <p className="text-gray-400 text-sm"><span className="font-medium" style={{ color: '#d4af37' }}>FPS:</span> {COMPANY_INFO.fps}</p>
+                  <p className="text-gray-400 text-sm mt-2"><span className="font-medium" style={{ color: '#d4af37' }}>Payment Terms:</span> {payment}</p>
                 </div>
                 <div>
-                  <h4 className="font-bold text-primary mb-3">Notes</h4>
+                  <h4 className="font-bold mb-3" style={{ color: '#d4af37' }}>Notes</h4>
                   <p className="text-gray-500 text-sm">Thank you for your business!</p>
                 </div>
               </div>
 
               {/* Signatures */}
-              <div className="grid grid-cols-2 gap-12 mt-12 pt-8">
+              <div className="grid grid-cols-2 gap-12 mt-12 pt-8 border-t" style={{ borderColor: 'rgba(212, 175, 55, 0.3)' }}>
                 <div>
-                  <p className="font-medium text-gray-700 mb-4">Received By:</p>
+                  <p className="font-medium text-white mb-4">Received By:</p>
                   <p className="text-gray-500 text-sm mb-2">For {customer.name}</p>
-                  <p className="border-b border-gray-300 mb-1">_______________________________</p>
-                  <p className="text-gray-400 text-xs">Client Signature & Chop</p>
+                  <p className="border-b mb-1" style={{ borderColor: '#d4af37' }}>_______________________________</p>
+                  <p className="text-gray-500 text-xs">Client Signature & Chop</p>
                 </div>
                 <div>
-                  <p className="font-medium text-gray-700 mb-4">Issued By:</p>
+                  <p className="font-medium text-white mb-4">Issued By:</p>
                   <p className="text-gray-500 text-sm mb-2">For {COMPANY_INFO.name}</p>
-                  <p className="border-b border-gray-300 mb-1">_______________________________</p>
-                  <p className="text-gray-400 text-xs">Authorized Signature & Chop</p>
+                  <p className="border-b mb-1" style={{ borderColor: '#d4af37' }}>_______________________________</p>
+                  <p className="text-gray-500 text-xs">Authorized Signature & Chop</p>
                 </div>
               </div>
+
+              {/* Decorative gold line */}
+              <div className="h-1 mt-8 rounded" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }}></div>
             </div>
           </>
         )}
 
         {activeTab === 'customers' && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-bold mb-4 text-gray-800">Customers</h2>
+          <div className="rounded-xl shadow-lg p-6" style={{ background: 'rgba(26, 26, 46, 0.9)', border: '1px solid #d4af37' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: '#d4af37' }}>Customers</h2>
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">ID</th>
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Name</th>
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Address</th>
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">ATTN</th>
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Tel</th>
+                <tr style={{ background: 'rgba(212, 175, 55, 0.2)' }}>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>ID</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>Name</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>Address</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>ATTN</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>Tel</th>
                 </tr>
               </thead>
               <tbody>
                 {SAMPLE_CUSTOMERS.map(c => (
-                  <tr key={c.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-sm">{c.id}</td>
-                    <td className="py-3 px-4 text-sm font-medium">{c.name}</td>
-                    <td className="py-3 px-4 text-sm text-gray-600">{c.address}</td>
-                    <td className="py-3 px-4 text-sm">{c.attn}</td>
-                    <td className="py-3 px-4 text-sm">{c.tel}</td>
+                  <tr key={c.id} className="border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
+                    <td className="py-3 px-4 text-sm text-gray-300">{c.id}</td>
+                    <td className="py-3 px-4 text-sm font-medium text-white">{c.name}</td>
+                    <td className="py-3 px-4 text-sm text-gray-400">{c.address}</td>
+                    <td className="py-3 px-4 text-sm text-gray-300">{c.attn}</td>
+                    <td className="py-3 px-4 text-sm text-gray-300">{c.tel}</td>
                   </tr>
                 ))}
               </tbody>
@@ -314,22 +321,22 @@ export default function InvoiceGenerator() {
         )}
 
         {activeTab === 'products' && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-bold mb-4 text-gray-800">Products</h2>
+          <div className="rounded-xl shadow-lg p-6" style={{ background: 'rgba(26, 26, 46, 0.9)', border: '1px solid #d4af37' }}>
+            <h2 className="text-lg font-bold mb-4" style={{ color: '#d4af37' }}>Products</h2>
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">JAN Code</th>
-                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-600">Product Name</th>
-                  <th className="py-3 px-4 text-right text-sm font-semibold text-gray-600">Unit Price (HK$)</th>
+                <tr style={{ background: 'rgba(212, 175, 55, 0.2)' }}>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>JAN Code</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold" style={{ color: '#d4af37' }}>Product Name</th>
+                  <th className="py-3 px-4 text-right text-sm font-semibold" style={{ color: '#d4af37' }}>Unit Price (HK$)</th>
                 </tr>
               </thead>
               <tbody>
                 {SAMPLE_PRODUCTS.map(p => (
-                  <tr key={p.jan} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-4 text-sm font-mono text-gray-600">{p.jan}</td>
-                    <td className="py-3 px-4 text-sm">{p.name}</td>
-                    <td className="py-3 px-4 text-sm text-right font-medium">${p.price}</td>
+                  <tr key={p.jan} className="border-b" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
+                    <td className="py-3 px-4 text-sm font-mono text-gray-400">{p.jan}</td>
+                    <td className="py-3 px-4 text-sm text-white">{p.name}</td>
+                    <td className="py-3 px-4 text-sm text-right font-medium" style={{ color: '#d4af37' }}>${p.price}</td>
                   </tr>
                 ))}
               </tbody>
@@ -337,18 +344,6 @@ export default function InvoiceGenerator() {
           </div>
         )}
       </main>
-
-      <style jsx global>{`
-        .bg-primary { background-color: #5e72e4; }
-        .text-primary { color: #5e72e4; }
-        .bg-success { background-color: #2dce89; }
-        .text-success { color: #2dce89; }
-        .bg-danger { background-color: #f5365c; }
-        .text-danger { color: #f5365c; }
-        .bg-light { background-color: #f7f8fc; }
-        .bg-warning { background-color: #fb6340; }
-        .text-warning { color: #fb6340; }
-      `}</style>
     </div>
   )
 }
